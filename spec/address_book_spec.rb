@@ -8,6 +8,17 @@ RSpec.describe AddressBook do
         expect(entry.phone_number).to eq expected_number
         expect(entry.email).to eq expected_email
     end
+    
+    describe "#detonate" do
+        it "should delete all entries" do
+            book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+            book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+            book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+        
+            book.detonate
+            expect(book.entries.size).to eq 0
+        end
+    end
 
     describe "attributes" do
         it "responds to entries" do
@@ -81,7 +92,7 @@ RSpec.describe AddressBook do
     end
 
     describe "#importing from entries_2.csv" do
-         it "imports the correct number of entries" do
+        it "imports the correct number of entries" do
             book.import_from_csv("entries_2.csv")
             book_size = book.entries.size
             expect(book_size).to eq 3
@@ -155,3 +166,4 @@ RSpec.describe AddressBook do
         end
     end
 end
+
